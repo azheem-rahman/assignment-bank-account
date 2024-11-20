@@ -7,9 +7,10 @@ const Input = (question: string): Promise<string> => {
       output: process.stdout,
     });
 
+    // question is the string that the user sees in console
     rl.question(`${question}`, (answer) => {
       rl.close();
-      resolve(answer);
+      resolve(answer); // return user input
     });
   });
 };
