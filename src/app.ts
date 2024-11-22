@@ -1,7 +1,8 @@
 import LaunchPrompt from "./components/LaunchPrompt";
+import TransactionPrompt from "./components/TransactionPrompt";
 
 const main = async () => {
-  console.log("App has started!");
+  console.log("App has started!\n");
 
   let launchInput = "";
 
@@ -16,22 +17,30 @@ const main = async () => {
     launchInput.toUpperCase() !== "Q"
   );
 
-  switch (launchInput.toUpperCase()) {
-    case "T":
-      console.log("user entered T");
-      break;
-    case "I":
-      console.log("user entered I");
-      break;
-    case "P":
-      console.log("user entered P");
-      break;
-    case "Q":
-      console.log("user entered Q");
-      break;
-    default:
-      console.log("Invalid operation, please re-enter");
-      break;
+  let input = "";
+
+  while (input === "") {
+    switch (launchInput.toUpperCase()) {
+      case "T":
+        input = await TransactionPrompt();
+        break;
+      case "I":
+        console.log("user entered I");
+        break;
+      case "P":
+        console.log("user entered P");
+        break;
+      case "Q":
+        console.log("user entered Q");
+        break;
+      default:
+        console.log("Invalid operation, please re-enter");
+        break;
+    }
+
+    if (input === "") {
+      input = await LaunchPrompt();
+    }
   }
 };
 
