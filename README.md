@@ -1,3 +1,8 @@
+# Note:
+- Since there is no user interface for this app, React was used only to provide component structure and logic (I was told to use React and allowed to use Typescript on Nodejs).
+- Interest rate for Print Statement feature is not added as I have difficulty calculating the interest rate from the balances (I will attempt again after deadline, Sat 24 Nov 2359hrs)
+- To start app: execute `npm start` at root directory of repo
+
 # Bank Account
 
 You're designing a simple banking system that handles operations on bank accounts. The system should be capable of the following features:
