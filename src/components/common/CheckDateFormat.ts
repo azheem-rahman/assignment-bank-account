@@ -11,21 +11,16 @@ const CheckDateFormat = (date: string): boolean => {
   }
 
   // check valid month, day
-  const dateCharArr = date.split("");
-  let yearArr: string[] = [];
   let monthArr: string[] = [];
   let dayArr: string[] = [];
-  dateCharArr.forEach((char, index) => {
-    if (index < 4) {
-      yearArr.push(char);
-    } else if (index < 6) {
-      monthArr.push(char);
+  for (let index = 4; index < date.length; index++) {
+    if (index < 6) {
+      monthArr.push(date[index]);
     } else if (index < 8) {
-      dayArr.push(char);
+      dayArr.push(date[index]);
     }
-  });
+  }
 
-  const year = Number(yearArr.join(""));
   const month = Number(monthArr.join(""));
   const day = Number(dayArr.join(""));
   if (day > 31) {
