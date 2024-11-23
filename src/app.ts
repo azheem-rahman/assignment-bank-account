@@ -1,12 +1,15 @@
 import FollowUpPrompt from "./components/FollowUpPrompt";
-import InterestPrompt from "./components/InterestPrompt";
+import InterestCheck from "./components/Interest/InterestCheck";
+import InterestPrint from "./components/Interest/InterestPrint";
+import InterestPrompt from "./components/Interest/InterestPrompt";
+import InterestUpdate from "./components/Interest/InterestUpdate";
 import MainMenu from "./components/MainMenu";
-import PrintPrompt from "./components/PrintPrompt";
+import PrintPrompt from "./components/Print/PrintPrompt";
 import QuitApp from "./components/QuitApp";
-import TransactionCheck from "./components/TransactionCheck";
-import TransactionIDGenerator from "./components/TransactionIDGenerator";
-import TransactionPrint from "./components/TransactionPrint";
-import TransactionPrompt from "./components/TransactionPrompt";
+import TransactionCheck from "./components/Transaction/TransactionCheck";
+import TransactionIDGenerator from "./components/Transaction/TransactionIDGenerator";
+import TransactionPrint from "./components/Transaction/TransactionPrint";
+import TransactionPrompt from "./components/Transaction/TransactionPrompt";
 import { mockTransactions } from "./data/mockData";
 
 const main = async () => {
@@ -25,7 +28,7 @@ const main = async () => {
       while (input !== "") {
         // show sub-menus
         switch (input.toUpperCase()) {
-          case "T":
+          case "T": {
             input = await TransactionPrompt();
             if (input === "") {
               break;
@@ -57,15 +60,45 @@ const main = async () => {
               });
               TransactionPrint(inputAccount);
               input = await FollowUpPrompt();
+              if (input.toUpperCase() === "Q") {
+                QuitApp();
+              }
             }
 
             break;
-          case "I":
+          }
+          case "I": {
             input = await InterestPrompt();
+            if (input === "") {
+              break;
+            }
+            const inputArr = input.split(" ");
+
+            const inputDate = inputArr[0];
+            const inputRuleId = inputArr[1];
+            const inputRate = inputArr[2];
+
+            const checkInterest = InterestCheck(inputDate, inputRate);
+
+            if (!checkInterest.valid) {
+              console.log(
+                `Invalid Interest Definition: ${checkInterest.message}`
+              );
+              input = "I"; // set input to I so that interest sub-menu is re-prompted
+            } else {
+              InterestUpdate(inputDate, inputRuleId, inputRate);
+              InterestPrint();
+              input = await FollowUpPrompt();
+              if (input.toUpperCase() === "Q") {
+                QuitApp();
+              }
+            }
             break;
-          case "P":
+          }
+          case "P": {
             input = await PrintPrompt();
             break;
+          }
           default:
             break;
         }
