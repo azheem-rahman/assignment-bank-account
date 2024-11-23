@@ -1,45 +1,38 @@
-import LaunchPrompt from "./components/LaunchPrompt";
+import InterestPrompt from "./components/InterestPrompt";
+import MainMenu from "./components/MainMenu";
+import PrintPrompt from "./components/PrintPrompt";
+import QuitApp from "./components/QuitApp";
 import TransactionPrompt from "./components/TransactionPrompt";
 
 const main = async () => {
   console.log("App has started!\n");
 
-  let launchInput = "";
-
-  // show first prompt "Welcome to AwesomeGIC Bank... and capture input"
-  // re-prompt if invalid input
-  do {
-    launchInput = await LaunchPrompt();
-  } while (
-    launchInput.toUpperCase() !== "T" &&
-    launchInput.toUpperCase() !== "I" &&
-    launchInput.toUpperCase() !== "P" &&
-    launchInput.toUpperCase() !== "Q"
-  );
-
   let input = "";
 
-  while (input === "") {
-    switch (launchInput.toUpperCase()) {
-      case "T":
-        input = await TransactionPrompt();
-        break;
-      case "I":
-        console.log("user entered I");
-        break;
-      case "P":
-        console.log("user entered P");
-        break;
-      case "Q":
-        console.log("user entered Q");
-        break;
-      default:
-        console.log("Invalid operation, please re-enter");
-        break;
-    }
+  // show main menu "Welcome to AwesomeGIC Bank... and capture input"
+  // quit app if input = Q or q
+  while (input.toUpperCase() !== "Q") {
+    input = await MainMenu();
 
-    if (input === "") {
-      input = await LaunchPrompt();
+    if (input.toUpperCase() === "Q") {
+      QuitApp();
+    } else {
+      while (input !== "") {
+        // show sub-menus
+        switch (input.toUpperCase()) {
+          case "T":
+            input = await TransactionPrompt();
+            break;
+          case "I":
+            input = await InterestPrompt();
+            break;
+          case "P":
+            input = await PrintPrompt();
+            break;
+          default:
+            break;
+        }
+      }
     }
   }
 };
