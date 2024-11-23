@@ -1,4 +1,4 @@
-import Input from "./Input";
+import Input from "./common/Input";
 
 // shows "Please enter interest rules details in <Date>..."
 const InterestPrompt = async (): Promise<string> => {

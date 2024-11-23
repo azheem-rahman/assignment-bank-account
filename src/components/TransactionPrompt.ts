@@ -1,4 +1,4 @@
-import Input from "./Input";
+import Input from "./common/Input";
 
 const TransactionPrompt = async (): Promise<string> => {
   const userInput = await Input(

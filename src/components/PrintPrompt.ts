@@ -1,4 +1,4 @@
-import Input from "./Input";
+import Input from "./common/Input";
 
 const PrintPrompt = async (): Promise<string> => {
   const userInput = await Input(
