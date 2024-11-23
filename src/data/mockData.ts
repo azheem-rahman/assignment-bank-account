@@ -1,3 +1,4 @@
+import { InterestRule } from "../types/interest";
 import { Transaction } from "../types/transaction";
 
 export let mockTransactions: Transaction[] = [
@@ -30,3 +31,27 @@ export let mockTransactions: Transaction[] = [
     amount: 100.0,
   },
 ];
+
+export let mockInterestRules: InterestRule[] = [
+  {
+    date: "20230101",
+    id: "RULE01",
+    rate: 1.95,
+  },
+  {
+    date: "20230520",
+    id: "RULE02",
+    rate: 1.9,
+  },
+  {
+    date: "20230615",
+    id: "RULE03",
+    rate: 2.2,
+  },
+];
+
+export const updateMockInterestRules = (
+  updatedRules: typeof mockInterestRules
+) => {
+  mockInterestRules.splice(0, mockInterestRules.length, ...updatedRules);
+};
