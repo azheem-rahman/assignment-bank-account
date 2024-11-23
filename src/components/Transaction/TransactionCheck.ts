@@ -1,5 +1,5 @@
-import { mockTransactions } from "../data/mockData";
-import CheckDateFormat from "./common/CheckDateFormat";
+import { mockTransactions } from "../../data/mockData";
+import CheckDateFormat from "../common/CheckDateFormat";
 
 const TransactionCheck = (
   inputDate: string,

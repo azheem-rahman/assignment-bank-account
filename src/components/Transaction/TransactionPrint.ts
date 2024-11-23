@@ -1,4 +1,4 @@
-import { mockTransactions } from "../data/mockData";
+import { mockTransactions } from "../../data/mockData";
 
 const TransactionPrint = (inputAccount: string) => {
   console.log(`Account: ${inputAccount}`);

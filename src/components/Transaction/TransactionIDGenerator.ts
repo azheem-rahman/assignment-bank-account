@@ -1,4 +1,4 @@
-import { mockTransactions } from "../data/mockData";
+import { mockTransactions } from "../../data/mockData";
 
 const TransactionIDGenerator = (date: string): string => {
   let count = 0;
