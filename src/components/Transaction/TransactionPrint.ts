@@ -8,7 +8,9 @@ const TransactionPrint = (inputAccount: string) => {
 
   const transactionRows = mockTransactions.map((transaction) => {
     if (transaction.account === inputAccount) {
-      return `${transaction.date} | ${transaction.id} | ${transaction.type}    | ${transaction.amount}`; // added blankspace for alignment
+      return `${transaction.date} | ${transaction.id} | ${
+        transaction.type
+      }    | ${transaction.amount.toFixed(2)}`; // added blankspace for alignment
     }
   });
   console.log(transactionRows.join("\n"));
