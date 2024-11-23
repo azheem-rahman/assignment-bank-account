@@ -6,11 +6,15 @@ const TransactionPrint = (inputAccount: string) => {
   const headers = ["Date    ", "Txn ID     ", "Type", "Amount"].join(" | "); // added blankspace for alignment
   console.log(headers);
 
-  const transactionRows = mockTransactions.map((transaction) => {
+  let transactionRows: string[] = [];
+
+  mockTransactions.map((transaction) => {
     if (transaction.account === inputAccount) {
-      return `${transaction.date} | ${transaction.id} | ${
-        transaction.type
-      }    | ${transaction.amount.toFixed(2)}`; // added blankspace for alignment
+      transactionRows.push(
+        `${transaction.date} | ${transaction.id} | ${
+          transaction.type
+        }    | ${transaction.amount.toFixed(2)}`
+      ); // added blankspace for alignment
     }
   });
   console.log(transactionRows.join("\n"));
