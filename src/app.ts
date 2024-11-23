@@ -4,7 +4,9 @@ import InterestPrint from "./components/Interest/InterestPrint";
 import InterestPrompt from "./components/Interest/InterestPrompt";
 import InterestUpdate from "./components/Interest/InterestUpdate";
 import MainMenu from "./components/MainMenu";
+import PrintCheck from "./components/Print/PrintCheck";
 import PrintPrompt from "./components/Print/PrintPrompt";
+import PrintStatement from "./components/Print/PrintStatement";
 import QuitApp from "./components/QuitApp";
 import TransactionCheck from "./components/Transaction/TransactionCheck";
 import TransactionIDGenerator from "./components/Transaction/TransactionIDGenerator";
@@ -97,6 +99,26 @@ const main = async () => {
           }
           case "P": {
             input = await PrintPrompt();
+            if (input === "") {
+              break;
+            }
+            const inputArr = input.split(" ");
+
+            const inputAccount = inputArr[0];
+            const inputYearMonth = inputArr[1];
+
+            const checkPrint = PrintCheck(inputAccount, inputYearMonth);
+
+            if (!checkPrint.valid) {
+              console.log(`Invalid Print: ${checkPrint.message}`);
+              input = "P"; // set input to P so that print sub-menu is re-prompted
+            } else {
+              PrintStatement(inputAccount, inputYearMonth);
+              input = await FollowUpPrompt();
+              if (input.toUpperCase() === "Q") {
+                QuitApp();
+              }
+            }
             break;
           }
           default:
